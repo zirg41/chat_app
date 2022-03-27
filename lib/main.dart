@@ -1,4 +1,6 @@
 import 'package:chat_app/screens/chat_screen.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -10,12 +12,22 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'FlutterChat',
-      theme: ThemeData(
-        primarySwatch: Colors.indigo,
-      ),
-      home: ChatScreen(),
+    return FutureBuilder(
+      future: Firebase.initializeApp(),
+      builder: (ctx, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        }
+        return MaterialApp(
+          title: 'FlutterChat',
+          theme: ThemeData(
+            primarySwatch: Colors.indigo,
+          ),
+          home: ChatScreen(),
+        );
+      },
     );
   }
 }
