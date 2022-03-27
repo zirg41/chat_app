@@ -29,9 +29,7 @@ class ChatScreen extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.add),
-        onPressed: () async {
-          await Firebase.initializeApp();
-        },
+        onPressed: () {},
       ),
     );
   }
