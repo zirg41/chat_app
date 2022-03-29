@@ -21,14 +21,35 @@ class _AuthFormState extends State<AuthForm> {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   TextFormField(
+                    // E-MAIL
                     keyboardType: TextInputType.emailAddress,
                     decoration:
                         const InputDecoration(labelText: "Email addres"),
+                    validator: (value) {
+                      if (value!.isEmpty || !value.contains("@")) {
+                        return "Pleasse enter a valid email address";
+                      }
+                      return null;
+                    },
                   ),
                   TextFormField(
+                    // USER NAME
+                    validator: (value) {
+                      if (value!.isEmpty || value.length < 4) {
+                        return "Please enter at least 4 characters";
+                      }
+                      return null;
+                    },
                     decoration: const InputDecoration(labelText: "Username"),
                   ),
                   TextFormField(
+                    // PASSWORD
+                    validator: (value) {
+                      if (value!.isEmpty || value.length < 4) {
+                        return "Password must be at least 4 characters long";
+                      }
+                      return null;
+                    },
                     decoration: const InputDecoration(labelText: "Password"),
                     obscureText: true,
                   ),
