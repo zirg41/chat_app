@@ -10,9 +10,9 @@ class AuthForm extends StatefulWidget {
 class _AuthFormState extends State<AuthForm> {
   final _formKey = GlobalKey<FormState>();
 
-  String _userEmail = '';
-  String _userName = '';
-  String _userPassword = '';
+  String? _userEmail = '';
+  String? _userName = '';
+  String? _userPassword = '';
 
   void _trySubmit() {
     final isValid = _formKey.currentState!.validate();
@@ -43,6 +43,9 @@ class _AuthFormState extends State<AuthForm> {
                       }
                       return null;
                     },
+                    onSaved: (value) {
+                      _userEmail = value;
+                    },
                   ),
                   TextFormField(
                     // USER NAME
@@ -53,6 +56,9 @@ class _AuthFormState extends State<AuthForm> {
                       return null;
                     },
                     decoration: const InputDecoration(labelText: "Username"),
+                    onSaved: (value) {
+                      _userName = value;
+                    },
                   ),
                   TextFormField(
                     // PASSWORD
@@ -64,6 +70,9 @@ class _AuthFormState extends State<AuthForm> {
                     },
                     decoration: const InputDecoration(labelText: "Password"),
                     obscureText: true,
+                    onSaved: (value) {
+                      _userPassword = value;
+                    },
                   ),
                   const SizedBox(height: 12),
                   RaisedButton(
