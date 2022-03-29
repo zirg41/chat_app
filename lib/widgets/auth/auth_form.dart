@@ -9,6 +9,16 @@ class AuthForm extends StatefulWidget {
 
 class _AuthFormState extends State<AuthForm> {
   final _formKey = GlobalKey<FormState>();
+
+  String _userEmail = '';
+  String _userName = '';
+  String _userPassword = '';
+
+  void _trySubmit() {
+    final isValid = _formKey.currentState!.validate();
+    if (isValid) {}
+  }
+
   @override
   Widget build(BuildContext context) {
     return Center(
