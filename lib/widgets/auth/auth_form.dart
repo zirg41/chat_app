@@ -9,6 +9,7 @@ class AuthForm extends StatefulWidget {
 
 class _AuthFormState extends State<AuthForm> {
   final _formKey = GlobalKey<FormState>();
+  bool _isLogin = true;
 
   String? _userEmail = '';
   String? _userName = '';
@@ -39,6 +40,7 @@ class _AuthFormState extends State<AuthForm> {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   TextFormField(
+                    key: const ValueKey('email'),
                     // E-MAIL
                     keyboardType: TextInputType.emailAddress,
                     decoration: const InputDecoration(
@@ -54,21 +56,24 @@ class _AuthFormState extends State<AuthForm> {
                       _userEmail = value;
                     },
                   ),
-                  TextFormField(
-                    // USER NAME
-                    validator: (value) {
-                      if (value!.isEmpty || value.length < 4) {
-                        return "Please enter at least 4 characters";
-                      }
-                      return null;
-                    },
-                    decoration: const InputDecoration(labelText: "Username"),
-                    onSaved: (value) {
-                      _userName = value;
-                    },
-                  ),
+                  if (!_isLogin)
+                    TextFormField(
+                      // USER NAME
+                      key: const ValueKey('username'),
+                      validator: (value) {
+                        if (value!.isEmpty || value.length < 4) {
+                          return "Please enter at least 4 characters";
+                        }
+                        return null;
+                      },
+                      decoration: const InputDecoration(labelText: "Username"),
+                      onSaved: (value) {
+                        _userName = value;
+                      },
+                    ),
                   TextFormField(
                     // PASSWORD
+                    key: const ValueKey('password'),
                     validator: (value) {
                       if (value!.isEmpty || value.length < 4) {
                         return "Password must be at least 4 characters long";
@@ -84,11 +89,17 @@ class _AuthFormState extends State<AuthForm> {
                   const SizedBox(height: 12),
                   RaisedButton(
                     onPressed: _trySubmit,
-                    child: const Text("Login"),
+                    child: Text(_isLogin ? "Login" : "Signup"),
                   ),
                   TextButton(
-                    onPressed: () {},
-                    child: const Text("Create new account"),
+                    onPressed: () {
+                      setState(() {
+                        _isLogin = !_isLogin;
+                      });
+                    },
+                    child: Text(_isLogin
+                        ? "Create new account"
+                        : "I already have an account"),
                   )
                 ],
               ),
