@@ -16,7 +16,13 @@ class _AuthFormState extends State<AuthForm> {
 
   void _trySubmit() {
     final isValid = _formKey.currentState!.validate();
-    if (isValid) {}
+    FocusScope.of(context).unfocus();
+    if (isValid) {
+      _formKey.currentState!.save();
+      print(_userEmail);
+      print(_userName);
+      print(_userPassword);
+    }
   }
 
   @override
@@ -35,8 +41,9 @@ class _AuthFormState extends State<AuthForm> {
                   TextFormField(
                     // E-MAIL
                     keyboardType: TextInputType.emailAddress,
-                    decoration:
-                        const InputDecoration(labelText: "Email addres"),
+                    decoration: const InputDecoration(
+                      labelText: "Email address",
+                    ),
                     validator: (value) {
                       if (value!.isEmpty || !value.contains("@")) {
                         return "Pleasse enter a valid email address";
@@ -76,7 +83,7 @@ class _AuthFormState extends State<AuthForm> {
                   ),
                   const SizedBox(height: 12),
                   RaisedButton(
-                    onPressed: () {},
+                    onPressed: _trySubmit,
                     child: const Text("Login"),
                   ),
                   TextButton(
