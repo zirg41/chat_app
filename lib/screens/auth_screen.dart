@@ -23,7 +23,7 @@ class _AuthScreenState extends State<AuthScreen> {
     BuildContext context,
   ) async {
     try {
-      var authResult;
+      UserCredential authResult;
       if (isLogin!) {
         authResult = await _auth.signInWithEmailAndPassword(
             email: email!, password: password!);
@@ -33,7 +33,7 @@ class _AuthScreenState extends State<AuthScreen> {
       }
       await FirebaseFirestore.instance
           .collection('users')
-          .doc(authResult.user.uid)
+          .doc(authResult.user!.uid)
           .set({
         'username': username,
         'email': email,
