@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -22,13 +23,21 @@ class _AuthScreenState extends State<AuthScreen> {
     BuildContext context,
   ) async {
     try {
+      var authResult;
       if (isLogin!) {
-        final authResult = await _auth.signInWithEmailAndPassword(
+        authResult = await _auth.signInWithEmailAndPassword(
             email: email!, password: password!);
       } else {
-        final authResult = await _auth.createUserWithEmailAndPassword(
+        authResult = await _auth.createUserWithEmailAndPassword(
             email: email!, password: password!);
       }
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(authResult.user.uid)
+          .set({
+        'username': username,
+        'email': email,
+      });
     } on FirebaseException catch (err) {
       var message = "An error occured, please check your credentials";
       if (err.message != null) {
