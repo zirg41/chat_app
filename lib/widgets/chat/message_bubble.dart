@@ -7,6 +7,7 @@ class MessageBubble extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    const _borderRadius = Radius.circular(12);
     return Row(
       mainAxisAlignment: isMe ? MainAxisAlignment.end : MainAxisAlignment.start,
       children: [
@@ -15,7 +16,12 @@ class MessageBubble extends StatelessWidget {
             color: isMe
                 ? Theme.of(context).colorScheme.secondary
                 : Colors.grey[800],
-            borderRadius: BorderRadius.circular(12),
+            borderRadius: BorderRadius.only(
+              topLeft: _borderRadius,
+              topRight: _borderRadius,
+              bottomRight: isMe ? Radius.zero : _borderRadius,
+              bottomLeft: !isMe ? Radius.zero : _borderRadius,
+            ),
           ),
           width: 140,
           padding: const EdgeInsets.symmetric(
