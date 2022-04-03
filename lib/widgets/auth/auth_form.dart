@@ -1,5 +1,6 @@
 // ignore_for_file: deprecated_member_use
 
+import 'package:chat_app/widgets/pickers/user_image_picker.dart';
 import 'package:flutter/material.dart';
 
 class AuthForm extends StatefulWidget {
@@ -53,15 +54,7 @@ class _AuthFormState extends State<AuthForm> {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  CircleAvatar(
-                    radius: 40,
-                  ),
-                  FlatButton.icon(
-                    onPressed: () {},
-                    icon: const Icon(Icons.image),
-                    label: const Text("Add image"),
-                    textColor: Theme.of(context).primaryColor,
-                  ),
+                  UserImagePicker(),
                   TextFormField(
                     key: const ValueKey('email'),
                     // E-MAIL
