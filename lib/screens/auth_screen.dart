@@ -46,12 +46,15 @@ class _AuthScreenState extends State<AuthScreen> {
 
       ref.putFile(image!);
 
+      final url = await ref.getDownloadURL();
+
       await FirebaseFirestore.instance
           .collection('users')
           .doc(authResult.user!.uid)
           .set({
         'username': username,
         'email': email,
+        'image_url': url,
       });
     } on FirebaseException catch (err) {
       var message = "An error occured, please check your credentials";
