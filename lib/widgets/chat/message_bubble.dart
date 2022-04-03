@@ -1,13 +1,12 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 class MessageBubble extends StatelessWidget {
-  const MessageBubble(this.message, this.username, this.isMe, {this.key});
+  const MessageBubble(this.message, this.username, this.isMe, {Key? key})
+      : super(key: key);
   final String message;
   final String username;
   final bool isMe;
-  final Key? key;
+  // final Key? key;
 
   @override
   Widget build(BuildContext context) {

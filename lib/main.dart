@@ -1,6 +1,5 @@
 import 'package:chat_app/screens/auth_screen.dart';
 import 'package:chat_app/screens/chat_screen.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -51,9 +50,9 @@ class MyApp extends StatelessWidget {
             // initialData: initialData,
             builder: (BuildContext context, AsyncSnapshot snapshot) {
               if (snapshot.hasData) {
-                return ChatScreen();
+                return const ChatScreen();
               }
-              return AuthScreen();
+              return const AuthScreen();
             },
           ),
         );

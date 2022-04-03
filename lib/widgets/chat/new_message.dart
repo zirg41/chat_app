@@ -3,7 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class NewMessage extends StatefulWidget {
-  NewMessage({Key? key}) : super(key: key);
+  const NewMessage({Key? key}) : super(key: key);
 
   @override
   State<NewMessage> createState() => _NewMessageState();
@@ -24,7 +24,7 @@ class _NewMessageState extends State<NewMessage> {
       {
         'text': _enteredMessage,
         'createdAt': Timestamp.now(),
-        'userId': user!.uid,
+        'userId': user.uid,
         "username": userData['username'],
       },
     );
@@ -40,7 +40,7 @@ class _NewMessageState extends State<NewMessage> {
           Expanded(
             child: TextField(
               controller: _controller,
-              decoration: InputDecoration(labelText: "Send a message..."),
+              decoration: const InputDecoration(labelText: "Send a message..."),
               onChanged: (value) {
                 setState(() {
                   _enteredMessage = value;
@@ -50,7 +50,7 @@ class _NewMessageState extends State<NewMessage> {
           ),
           IconButton(
             onPressed: _enteredMessage.trim().isEmpty ? null : _sendMessage,
-            icon: Icon(
+            icon: const Icon(
               Icons.send,
               // color: Theme.of(context).primaryColor,
             ),
