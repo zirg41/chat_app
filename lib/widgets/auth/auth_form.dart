@@ -39,7 +39,7 @@ class _AuthFormState extends State<AuthForm> {
     FocusScope.of(context).unfocus();
 
     if (_userAvatarFile == null && !_isLogin) {
-      Scaffold.of(context).showSnackBar(const SnackBar(
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
         content: Text("Please pick image"),
       ));
 
@@ -123,7 +123,7 @@ class _AuthFormState extends State<AuthForm> {
                   const SizedBox(height: 12),
                   widget.isLoading
                       ? const Center(child: CircularProgressIndicator())
-                      : RaisedButton(
+                      : ElevatedButton(
                           onPressed: _trySubmit,
                           child: Text(_isLogin ? "Login" : "Signup"),
                         ),

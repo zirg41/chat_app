@@ -38,11 +38,10 @@ class _UserImagePickerState extends State<UserImagePicker> {
           backgroundImage:
               _pickedImage == null ? null : FileImage(_pickedImage!),
         ),
-        FlatButton.icon(
+        TextButton.icon(
           onPressed: _pickImage,
           icon: const Icon(Icons.image),
           label: const Text("Add image"),
-          textColor: Theme.of(context).primaryColor,
         ),
       ],
     );

@@ -62,7 +62,7 @@ class _AuthScreenState extends State<AuthScreen> {
         message = err.message!;
       }
       // ignore: deprecated_member_use
-      Scaffold.of(context).showSnackBar(SnackBar(
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         content: Text(message),
         backgroundColor: Theme.of(context).errorColor,
       ));
